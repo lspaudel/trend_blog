@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Blog - Trend Blogger</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+
+        <div class="nav container">
+        <div style="margin-left: auto;"> <!-- Move buttons to the right -->
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'accounts:logout' %}" class="login">Logout</a>
+                {% endif %}
+        </div>
+    </header>
+
+    <section class="form-container container">
+        <h2>Update Blog</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <!-- Update and Cancel buttons -->
+            <div class="button-group">
+                <button type="submit" class="btn-primary">Update</button>
+                <button type="button" class="btn-secondary" onclick="history.back()">Cancel</button>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Trend Blogger. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <div class="signup-container">
+        <h2 class="signup-title">Create an Account</h2>
+        <form method="POST" enctype="multipart/form-data" class="signup-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn-primary">Sign Up</button>
+                <!-- Cancel button with JavaScript -->
+                <button type="button" class="btn-secondary" onclick="history.back()">Cancel</button>
+            </div>
+        </form>
+
+        <!-- Add a "Sign in" link at the bottom -->
+        <div class="signin-link">
+            <p>Already have an account? 
+                <a href="{% url 'accounts:login' %}">Sign in</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

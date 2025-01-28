@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Trend Blogger</title>
+    <!-- Box-icon -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav container" style="display: flex; align-items: center; gap: 10px;">
+            <!-- Correct home page link -->
+            <a href="{% url 'blog:blog-home' %}" class="logo" style="color: black; text-decoration: none; font-size: 20px;">Trend Blogger</a>
+            <!-- Ensure 'logout' is defined in urls.py -->
+            <a href="{% url 'accounts:logout' %}" class="btn2" style="margin-left: auto;">Logout</a>
+        </div>
+    </header>
+    
+    <br><br>
+    <br><br>
+    
+    <section class="home" id="home">
+        <div class="home-text container">
+            <h2 class="home-title">Trend Blogger</h2>
+            <span class="home-subtitle">Your source of great content</span>
+        </div>
+    </section>
+
+    <section class="profile-header container">
+        <h2>Welcome, {{ user.username }}</h2>
+        <p>Manage your blogs here.</p>
+        <a href="{% url 'blog:create_blog' %}" class="btn2">Create New Blog</a>
+    </section>
+
+
+
+
+
+    <div class="post-filter container">
+        <span class="filter-item active-filter" data-filter="all">All</span>
+        <span class="filter-item" data-filter="tech">Tech</span>
+        <span class="filter-item" data-filter="food">Food</span>
+        <span class="filter-item" data-filter="news">News</span>
+        <span class="filter-item" data-filter="life">life</span>
+    </div>
+
+    
+    
+    
+    <!-- Display User's Blog Posts with Profile Picture -->
+    <div class="post container">
+        {% for blog in user_blogs %}
+        <div class="post-box {{ blog.category|lower }}">
+            
+            <img src="{{ blog.image.url }}" alt="Blog Image" class="post-img">
+
+            <h2 class="category">{{ blog.category }}</h2>
+            <a href="{% url 'blog:blog_detail' blog.id %}" class="post-title">{{ blog.title }}</a>
+            
+            <span class="post-date">{{ blog.created_at }}</span>
+            <p class="post-description">{{ blog.content|truncatewords:30 }}</p>
+            
+        
+            {% if blog.profile_picture %}
+                <img src="{{ blog.profile_picture.url }}" alt="Profile Picture" class="profile-img">
+            {% else %}
+                <img src="{% static 'blog/images/default-profile.png' %}" alt="Default Profile Picture" class="profile-img">
+            {% endif %}
+            
+            <h5>{{ user.username }}</h5>
+
+            <div class="actions">
+                <a href="{% url 'blog:update_blog' blog.id %}" class="btn2" style="display: inline-block; margin-right: 10px;">Update</a>
+                <form method="POST" action="{% url 'blog:delete_blog' blog.id %}" style="display: inline-block;" onsubmit="return confirmDelete()">
+                    {% csrf_token %}
+                    <button type="submit" class="btn2 danger">Delete</button>
+                </form>
+            </div>
+            
+            <script>
+                function confirmDelete() {
+                    return confirm("Are you sure you want to delete this blog?");
+                }
+            </script>
+            
+        </div>
+        {% empty %}
+        <p>No blogs found. Create your first blog now!</p>
+        {% endfor %}
+    </div>
+
+    
+    <footer>
+        <div class="footer-container">
+            <div class="sec aboutus">
+                <h2>About Us</h2>
+                <p style="text-align:justify;">Welcome to <strong>Trend Blogger</strong>, your ultimate destination for discovering, creating, and sharing engaging content! 
+                    At Trend Blogger, we believe in the power of stories, creativity, and innovation to inspire the world.
+                    Our mission is to provide a platform for bloggers, writers, and creators to showcase their talents and connect with a global audience.</p>
+                <ul class="sci">
+                    <li><a href="#"><i class="bx bxl-facebook"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-instagram"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-twitter"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="sec quicklinks">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="sec contactBx">
+                <h2>Contact Info</h2>
+                <ul class="info">
+                    <li>
+                        <span><i class='bx bxs-map'></i></span>
+                        <span>6444 London street <br> Brighton PA 33445 <br> UK</span>
+                    </li>
+                    <li>
+                        <span><i class='bx bx-envelope' ></i></span>
+                        <p><a href="mailto:codemyhobby9@gmail.com">Hellocode@mail.com</a></p>
+                        <br>
+                        <br>
+                    </li>
+                </ul>
+                <p style="text-align: center" >&copy; 2025 Trend Blogger. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'blog/js/main.js' %}"></script>
+</body>
+</html>

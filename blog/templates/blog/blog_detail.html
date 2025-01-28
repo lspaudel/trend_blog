@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.title }}</title>
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ blog.title }}</h1>
+    </header>
+    <section>
+        <h3>Category: {{ blog.category }}</h3>
+        <p>{{ blog.content }}</p>
+        {% if blog.image %}
+            <img src="{{ blog.image.url }}" alt="Blog Image">
+        {% endif %}
+        <a href="{% url 'blog:blog-home' %}">Back to Home</a>
+    </section>
+</body>
+</html>

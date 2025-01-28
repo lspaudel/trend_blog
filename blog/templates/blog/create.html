@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog - Trend Blogger</title>
+    <!-- Box-icon -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <!--  URL homepage -->
+            <a href="{% url 'blog:home' %}" class="logo">Trend Blogger</a>
+            <!--  'logout' URL  -->
+            <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+        </div>
+    </header>
+
+    <section class="login-container">
+        <h2 class= "login-title">Create New Blog</h2>
+        <form method="POST"  class="login-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Display form errors if any -->
+            {% if form.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li><strong>{{ field|capfirst }}:</strong> {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <!-- Render the form -->
+            {{ form.as_p }}
+
+
+            <button type="submit" class="btn1">Submit</button>
+        </form>
+    </section>
+
+
+
+    <footer style="background-color: #333; color: white; text-align: center; padding: 10px; position: absolute; bottom: 0; width: 100%;">
+        <div class="footer-container">
+          <p style="margin: 0; text-align: center">&copy; 2025 Trend Blogger. All rights reserved.</p> 
+        </div>
+    </footer>
+    
+</body>
+</html>

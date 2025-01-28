@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Blogger</title>
+    <!-- Box-icon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <a href="#" class="logo">Trend Blogger</a>
+            <div style="margin-left: auto;"> <!-- Move buttons to the right -->
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'accounts:logout' %}" class="login">Logout</a>
+                {% else %}
+                    <a href="{% url 'accounts:signup' %}" class="login">Sign Up</a>
+                    <a href="{% url 'accounts:login' %}" class="login">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+        
+    </header>
+
+    <section class="home" id="home">
+        <div class="home-text container">
+            <h2 class="home-title">Trend Blogger</h2>
+            <span class="home-subtitle">Your source of great content</span>
+        </div>
+    </section>
+
+    <section class="about container" id="about">
+        <div class="contentBx">
+            <h2 class="titleText">Catch up with the trending topics</h2>
+            <p class="title-text">
+                Stay informed with the latest updates and trends in various fields. Explore and share your own content with the world.
+            </p>
+            <a href="#" class="btn2">Read more</a>
+        </div>
+        <div class="imgBx">
+            <img src="{% static 'blog/images/about.png' %}" alt="About Us Image" class="fitBg">
+        </div>
+    </section>
+
+    <div class="post-filter container">
+        <span class="filter-item active-filter" data-filter="all">All</span>
+        <span class="filter-item" data-filter="tech">Tech</span>
+        <span class="filter-item" data-filter="food">Food</span>
+        <span class="filter-item" data-filter="news">News</span>
+        <span class="filter-item" data-filter="life">life</span>
+    </div>
+
+   
+
+    <div class="post container">
+        {% for blog in user_blogs %}
+            <div class="post-box {{ blog.category|lower }}">
+                <img src="{{ blog.image.url }}" alt="Blog Image" class="post-img">
+                <h2 class="category">{{ blog.category }}</h2>
+                <a href="{% url 'blog:blog_detail' blog.id %}" class="post-title">{{ blog.title }}</a>
+                <span class="post-date">{{ blog.created_at|date:"F j, Y" }}</span>
+                <p class="post-description">{{ blog.content|truncatewords:30 }}</p>
+    
+                {% if blog.profile_picture %}
+                    <img src="{{ blog.profile_picture.url }}" alt="Profile Picture" class="profile-img">
+                {% else %}
+                    <img src="{% static 'blog/images/default-profile.png' %}" alt="Default Profile Picture" class="profile-img">
+                {% endif %}
+    
+                <h5>Posted by: {{ blog.user.username }}</h5>
+            </div>
+        {% empty %}
+            <p>No blogs available to display.</p>
+        {% endfor %}
+    </div>
+    
+    
+
+    <footer>
+        <div class="footer-container">
+            <div class="sec aboutus">
+                <h2>About Us</h2>
+                <p>We are dedicated to connecting people through meaningful content. Discover, share, and enjoy the world of blogging.</p>
+                <ul class="sci">
+                    <li><a href="#"><i class="bx bxl-facebook"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-instagram"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-twitter"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="sec quicklinks">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="sec contactBx">
+                <h2>Contact Info</h2>
+                <ul class="info">
+                    <li>
+                        <span><i class='bx bxs-map'></i></span>
+                        <span>6444 London Street, Brighton, PA 33445, UK</span>
+                    </li>
+                    <li>
+                        <span><i class='bx bx-envelope'></i></span>
+                        <p><a href="mailto:hellocode@mail.com">hellocode@mail.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'blog/js/main.js' %}"></script>
+</body>
+</html>

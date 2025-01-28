@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    
+    <!-- Inline CSS -->
+    <style>
+        /* Styling for the section title */
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: #256c38; /* Example color */
+            margin-bottom: 2rem;
+        }
+
+        /* Container for the buttons */
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center the buttons horizontally */
+            gap: 1.5rem; /* Space between the buttons */
+        }
+
+        /* Fancy button styling */
+        .fancy-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(77, 228, 255), #256c38); /* Gradient effect */
+            color: #fff; /* White text */
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+            border-radius: 50px; /* Fully rounded corners */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: all 0.3s ease; /* Smooth transition */
+            text-decoration: none; /* No underline */
+        }
+
+        /* Hover effect for buttons */
+        .fancy-btn:hover {
+            transform: translateY(-5px); /* Lift the button */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+            background: linear-gradient(135deg, #256c38, rgba(77, 228, 255)); /* Reverse gradient */
+        }
+
+        /* Responsive design: Stack buttons vertically on smaller screens */
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                gap: 1rem; /* Reduce gap for smaller screens */
+            }
+
+            .fancy-btn {
+                width: 80%; /* Make buttons wider */
+                margin: 0 auto; /* Center the buttons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2 class="welcome-title">Welcome to the Accounts Section</h2>
+    <div class="button-container">
+        <a class="fancy-btn" href="{% url 'blog:blog-home' %}">Trend Blogger</a>
+        <a class="fancy-btn" href="{% url 'accounts:login' %}">Log In</a>
+        <a class="fancy-btn" href="{% url 'accounts:signup' %}">Sign Up</a>
+    </div>
+</body>
+</html>
+

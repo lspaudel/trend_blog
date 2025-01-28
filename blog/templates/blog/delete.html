@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Blog - Trend Blogger</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <a href="{% url 'blog:blog-home' %}" class="logo">Trend Blogger</a>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </div>
+    </header>
+
+    <section class="form-container container">
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete the blog "{{ blog.title }}"?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn2 danger">Delete</button>
+            <a href="{% url 'profile' %}" class="btn2">Cancel</a>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Trend Blogger. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
