@@ -81,3 +81,45 @@ Welcome to **Trend Blog**, a blogging platform built using Django. This project 
     ├── settings.py
     ├── urls.py
     └── wsgi.py
+```
+## Setup and Running the Project
+
+### Clone the repository
+
+```bash
+git clone https://github.com/lspaudel/trend_blog
+cd trend_blog
+```
+### Create a virtual environment
+```bash
+python3 -m venv venv
+```
+### Activate the virtual environment
+  macOS / Linux:
+  ```bash
+    source venv/bin/activate
+  ```
+Windows:
+```bash
+venv\Scripts\activate
+```
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+### Apply migrations
+```bash
+python manage.py migrate
+```
+### Create a superuser (optional, for admin panel)
+```bash
+python manage.py createsuperuser
+```
+### Run the development server
+```bash
+python manage.py runserver
+```
+- Open your browser at: `http://127.0.0.1:8000/`
+
+- Admin panel (if superuser created): `http://127.0.0.1:8000/admin/`
+
