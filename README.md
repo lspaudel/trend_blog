@@ -216,11 +216,3 @@ Before deploying to production:
 7. **Set up regular backups**
 
 For detailed deployment instructions, see the setup guide in the project artifacts.
-
----
-
----
-
-## Support
-
-For issues, questions, or contributions, please open an issue on GitHub.
