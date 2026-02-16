@@ -180,24 +180,24 @@ python manage.py check --deploy
 
 This project has been enhanced with:
 
-✅ **Security Hardening**
+**Security Hardening**
 - Environment-based configuration (no hardcoded secrets)
 - AUTH_USER_MODEL properly configured
 - Security middleware and headers
 - Production-ready settings
 
-✅ **Better Error Handling**
+**Better Error Handling**
 - User-friendly error messages
 - Comprehensive logging
 - Permission checks on all operations
 
-✅ **Code Quality**
+**Code Quality**
 - Soft delete for data recovery
 - Custom model managers
 - Admin interface enhancements
 - SEO-friendly slugs
 
-✅ **Testing Infrastructure**
+**Testing Infrastructure**
 - Pytest configuration
 - Coverage reporting setup
 
@@ -218,20 +218,6 @@ Before deploying to production:
 For detailed deployment instructions, see the setup guide in the project artifacts.
 
 ---
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
