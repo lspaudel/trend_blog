@@ -2,12 +2,46 @@
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+.Python
 
 # Django-related
 db.sqlite3
+db.sqlite3-journal
 /media/
 /staticfiles/
+/static_root/
 
 # Virtual Environment
 django_env/
+venv/
+.venv/
+env/
+ENV/
 
+# Environment variables (CRITICAL - never commit!)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Backup files
+*.backup
+*.bak
